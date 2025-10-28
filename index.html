@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeggieBot 🍅 | Your Smart Vegetable Assistant</title>
+  <style>
+    /* 🌿 Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #2b2b2b;
+    }
+
+    /* 🌱 Floating background elements */
+    .leaf {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: url('https://cdn-icons-png.flaticon.com/512/766/766512.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      animation: float 15s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      25% { opacity: 0.2; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Random leaf positions */
+    .leaf:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .leaf:nth-child(2) { left: 25%; animation-delay: 2s; }
+    .leaf:nth-child(3) { left: 40%; animation-delay: 4s; }
+    .leaf:nth-child(4) { left: 60%; animation-delay: 6s; }
+    .leaf:nth-child(5) { left: 80%; animation-delay: 8s; }
+
+    /* 🥕 Chat container styling */
+    .chat-container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      max-width: 90%;
+      z-index: 2;
+    }
+
+    .chat-container h1 {
+      font-size: 2em;
+      color: #ffffff;
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .chat-container p {
+      color: #f0fdf4;
+      margin: 10px 0 20px;
+      font-size: 1em;
+    }
+
+    .chat-container button {
+      background: linear-gradient(90deg, #56ab2f, #a8e063);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(86,171,47,0.4);
+    }
+
+    .chat-container button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #a8e063, #56ab2f);
+      box-shadow: 0 6px 20px rgba(86,171,47,0.5);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      width: 100%;
+      font-size: 0.9em;
+      color: #f0fdf4;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🌿 Floating leaves background -->
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+
+  <!-- 🥦 Chat container -->
+  <div class="chat-container">
+    <h1>VeggieBot 🌽</h1>
+    <p>Your smart garden buddy — Ask me anything about vegetables!</p>
+    <button onclick="launchChat()">💬 Chat Now</button>
+  </div>
+
+  <footer>© 2025 VeggieBot | Powered by IBM Watson Assistant</footer>
+
+  <!-- 🧠 IBM Watson Chat API -->
+  <script>
+    function launchChat() {
+      window.watsonAssistantChatOptions = {
+        integrationID: "cf48185c-a71b-4255-b564-fe832868f140",
+        region: "eu-de",
+        serviceInstanceID: "d6d05ff6-1e0c-4500-baea-71eb9bdc439a",
+        onLoad: async (instance) => { await instance.render(); }
+      };
+      setTimeout(function(){
+        const t=document.createElement('script');
+        t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + 
+        (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    }
+  </script>
+</body>
+</html>
